@@ -74,16 +74,40 @@ void setup()
     ledcAttach(PIN_LCD_BL, 200, 8);
     ledcWrite(PIN_LCD_BL, 255);
 #endif
-}
+
+#define AAA_TEST
+#ifdef AAA_TEST
+    targetTime = millis();
+
+    // First we test them with a background colour set
+    //tft.setTextSize(1);
+    tft.setTextSize(2);
+    tft.fillScreen(TFT_BLACK);
+    tft.setTextColor(TFT_GREEN, TFT_BLACK);
+    tft.
+#endif
+
+
+} // setup
 
 void loop()
 {
+#ifdef AAA_TEST
+
+    for(int line = 0; line < 99; line++){
+        tft.print("line ");
+        tft.println(line);
+        delay(WAIT);
+    }
+
+#else
     targetTime = millis();
 
     // First we test them with a background colour set
     tft.setTextSize(1);
     tft.fillScreen(TFT_BLACK);
     tft.setTextColor(TFT_GREEN, TFT_BLACK);
+
 
     tft.drawString(" !\"#$%&'()*+,-./0123456", 0, 0, 2);
     tft.drawString("789:;<=>?@ABCDEFGHIJKL", 0, 16, 2);
@@ -231,6 +255,9 @@ void loop()
 
     tft.drawNumber(millis() - targetTime, 0, 100, 4);
     delay(4000);
+
+#endif // AAA
+
 }
 
 
